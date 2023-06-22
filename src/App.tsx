@@ -8,6 +8,7 @@ import ErrorMessage from './components/ErrorMessage';
 import StartScreen from './components/StartScreen';
 import Question from './components/Question';
 import NextButton from './components/NextButton';
+import Progress from './components/Progress';
 
 const initialState: Quiz = {
   questions: [],
@@ -62,6 +63,10 @@ function App() {
     initialState
   );
   const numQuestions = questions.length;
+  const maxPoints = questions.reduce(
+    (acc, question) => acc + question.points,
+    0
+  );
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -90,6 +95,13 @@ function App() {
         )}
         {status === StatusType.Active && (
           <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              maxPoints={maxPoints}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               answer={answer}
