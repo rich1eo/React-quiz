@@ -1,34 +1,75 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useReducer } from 'react';
+
+enum ActionType {
+  Increase = 'INCREASE',
+  Decrease = 'DECREASE',
+  DefineCount = 'DEFINE_COUNT',
+  DefineStep = 'DEFINE_STEP',
+  Reset = 'RESET',
+}
+
+type State = {
+  count: number;
+  step: number;
+};
+
+type Action = {
+  type: ActionType;
+  payload?: number;
+};
+
+const initialState: State = {
+  count: 0,
+  step: 1,
+};
+
+function counterReducer(state: State, { type, payload }: Action): State {
+  switch (type) {
+    case ActionType.Increase:
+      return { ...state, count: state.count + state.step };
+
+    case ActionType.Decrease:
+      return { ...state, count: state.count - state.step };
+
+    case ActionType.DefineCount:
+      return { ...state, count: payload! };
+
+    case ActionType.DefineStep:
+      return { ...state, step: payload! };
+
+    case ActionType.Reset:
+      return initialState;
+
+    default:
+      return state;
+  }
+}
 
 function DateCounter() {
-  const [count, setCount] = useState<number>(0);
-  const [step, setStep] = useState<number>(1);
+  const [{ step, count }, dispatch] = useReducer(counterReducer, initialState);
 
   // This mutates the date object.
   const date = new Date('june 21 2027');
   date.setDate(date.getDate() + count);
 
   const dec = function () {
-    // setCount((count) => count - 1);
-    setCount(count => count - step);
+    dispatch({ type: ActionType.Decrease });
   };
 
   const inc = function () {
-    // setCount((count) => count + 1);
-    setCount(count => count + step);
+    dispatch({ type: ActionType.Increase });
   };
 
   const defineCount = function (e: ChangeEvent<HTMLInputElement>) {
-    setCount(Number(e.target.value));
+    dispatch({ type: ActionType.DefineCount, payload: +e.target.value });
   };
 
   const defineStep = function (e: ChangeEvent<HTMLInputElement>) {
-    setStep(Number(e.target.value));
+    dispatch({ type: ActionType.DefineStep, payload: +e.target.value });
   };
 
   const reset = function () {
-    setCount(0);
-    setStep(1);
+    dispatch({ type: ActionType.Reset });
   };
 
   return (
