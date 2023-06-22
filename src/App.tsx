@@ -7,6 +7,7 @@ import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
 import StartScreen from './components/StartScreen';
 import Question from './components/Question';
+import NextButton from './components/NextButton';
 
 const initialState: Quiz = {
   questions: [],
@@ -41,6 +42,13 @@ function reducer(state: Quiz, action: Action): Quiz {
           action.payload === question?.correctOption
             ? state.points + question.points
             : state.points,
+      };
+
+    case ActionType.NextQuestions:
+      return {
+        ...state,
+        index: state.index++,
+        answer: null,
       };
 
     default:
@@ -81,11 +89,14 @@ function App() {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === StatusType.Active && (
-          <Question
-            question={questions[index]}
-            answer={answer}
-            dispatch={dispatch}
-          />
+          <>
+            <Question
+              question={questions[index]}
+              answer={answer}
+              dispatch={dispatch}
+            />
+            <NextButton answer={answer} dispatch={dispatch} />
+          </>
         )}
       </Main>
     </div>

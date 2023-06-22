@@ -24,6 +24,7 @@ export enum ActionType {
   DataFailed = 'DATA_FAILED',
   Start = 'START',
   NewAnswer = 'NEW_ANSWER',
+  NextQuestions = 'NEXT_QUESTION',
 }
 
 export type Quiz = {
@@ -48,4 +49,7 @@ export type Action =
     }
   | {
       type: ActionType.Start;
+    }
+  | {
+      type: ActionType.NextQuestions;
     };
