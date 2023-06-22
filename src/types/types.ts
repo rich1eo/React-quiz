@@ -25,6 +25,7 @@ export enum ActionType {
   Start = 'START',
   NewAnswer = 'NEW_ANSWER',
   NextQuestions = 'NEXT_QUESTION',
+  Finish = 'FINISH',
 }
 
 export type Quiz = {
@@ -33,6 +34,7 @@ export type Quiz = {
   index: number;
   answer: null | number;
   points: number;
+  highScore: number;
 };
 
 export type Action =
@@ -52,4 +54,7 @@ export type Action =
     }
   | {
       type: ActionType.NextQuestions;
+    }
+  | {
+      type: ActionType.Finish;
     };
