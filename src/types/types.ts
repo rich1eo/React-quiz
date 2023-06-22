@@ -12,11 +12,11 @@ export interface IQuestion {
 // Quiz Reducer
 
 export enum StatusType {
-  Loading = 'loading',
-  Error = 'error',
-  Ready = 'ready',
-  Active = 'active',
-  Finished = 'finished',
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Ready = 'READY',
+  Active = 'ACTIVE',
+  Finished = 'FINISHED',
 }
 
 export enum ActionType {
