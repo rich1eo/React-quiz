@@ -1,10 +1,18 @@
+import { Action, ActionType } from '../types/types';
+
 interface FinishScreenProps {
   points: number;
   maxPoints: number;
   highScore: number;
+  dispatch(action: Action): void;
 }
 
-function FinishScreen({ points, maxPoints, highScore }: FinishScreenProps) {
+function FinishScreen({
+  points,
+  maxPoints,
+  highScore,
+  dispatch,
+}: FinishScreenProps) {
   const percentage = Math.round((points / maxPoints) * 100);
   let emoji;
 
@@ -22,6 +30,12 @@ function FinishScreen({ points, maxPoints, highScore }: FinishScreenProps) {
         {percentage}%)
       </p>
       <p className="highscore">(Highscore: {highScore} points)</p>
+      <button
+        className="btn btn-ui"
+        onClick={() => dispatch({ type: ActionType.Restart })}
+      >
+        Restart
+      </button>
     </>
   );
 }
