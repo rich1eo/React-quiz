@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
-import { Action, ActionType } from '../types/types';
+import { ActionType } from '../types/types';
+import { useQuiz } from '../hooks/useQuiz';
 
-interface TimerProps {
-  secondsRemaining: number | null;
-  dispatch(action: Action): void;
-}
+function Timer() {
+  const { secondsRemaining, dispatch } = useQuiz();
 
-function Timer({ secondsRemaining, dispatch }: TimerProps) {
   const mins = Math.floor(secondsRemaining! / 60);
   const seconds = secondsRemaining! % 60;
 

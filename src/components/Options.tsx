@@ -1,13 +1,12 @@
-import { Action, ActionType, IQuestion } from '../types/types';
+import { useQuiz } from '../hooks/useQuiz';
+import { ActionType } from '../types/types';
 
-interface OptionsProps {
-  answer: number | null;
-  question: IQuestion;
-  dispatch(action: Action): void;
-}
+function Options() {
+  const { answer, questions, index, dispatch } = useQuiz();
 
-function Options({ question, answer, dispatch }: OptionsProps) {
+  const question = questions[index];
   const hasAnswered = answer !== null;
+
   return (
     <div className="options">
       {question.options.map((option, i) => (

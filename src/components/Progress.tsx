@@ -1,18 +1,7 @@
-interface ProgressProps {
-  index: number;
-  numQuestions: number;
-  points: number;
-  maxPoints: number;
-  answer: number | null;
-}
+import { useQuiz } from '../hooks/useQuiz';
 
-function Progress({
-  index,
-  numQuestions,
-  points,
-  maxPoints,
-  answer,
-}: ProgressProps) {
+function Progress() {
+  const { index, numQuestions, points, maxPoints, answer } = useQuiz();
   return (
     <header className="progress">
       <progress max={numQuestions} value={index + Number(answer !== null)} />

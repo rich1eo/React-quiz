@@ -1,11 +1,9 @@
-import { Action, ActionType } from '../types/types';
+import { useQuiz } from '../hooks/useQuiz';
+import { ActionType } from '../types/types';
 
-interface StartScreenProps {
-  numQuestions: number;
-  dispatch(action: Action): void;
-}
+function StartScreen() {
+  const { numQuestions, dispatch } = useQuiz();
 
-function StartScreen({ numQuestions, dispatch }: StartScreenProps) {
   function handleStart() {
     dispatch({ type: ActionType.Start });
   }

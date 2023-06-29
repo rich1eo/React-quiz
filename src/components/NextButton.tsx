@@ -1,18 +1,9 @@
-import { Action, ActionType } from '../types/types';
+import { useQuiz } from '../hooks/useQuiz';
+import { ActionType } from '../types/types';
 
-interface NextButtonProps {
-  answer: number | null;
-  index: number;
-  numQuestions: number;
-  dispatch(action: Action): void;
-}
+function NextButton() {
+  const { answer, index, numQuestions, dispatch } = useQuiz();
 
-function NextButton({
-  answer,
-  index,
-  numQuestions,
-  dispatch,
-}: NextButtonProps) {
   if (answer === null) return null;
 
   if (index < numQuestions - 1)
