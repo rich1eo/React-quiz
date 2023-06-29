@@ -30,7 +30,7 @@ export enum ActionType {
   Tick = 'TICK',
 }
 
-export type Quiz = {
+export interface IQuiz {
   questions: IQuestion[];
   status: StatusType;
   index: number;
@@ -38,7 +38,7 @@ export type Quiz = {
   points: number;
   highScore: number;
   secondsRemaining: number | null;
-};
+}
 
 export type Action =
   | {

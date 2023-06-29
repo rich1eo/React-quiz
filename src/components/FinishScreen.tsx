@@ -1,18 +1,9 @@
-import { Action, ActionType } from '../types/types';
+import { useQuiz } from '../hooks/useQuiz';
+import { ActionType } from '../types/types';
 
-interface FinishScreenProps {
-  points: number;
-  maxPoints: number;
-  highScore: number;
-  dispatch(action: Action): void;
-}
+function FinishScreen() {
+  const { points, maxPoints, highScore, dispatch } = useQuiz();
 
-function FinishScreen({
-  points,
-  maxPoints,
-  highScore,
-  dispatch,
-}: FinishScreenProps) {
   const percentage = Math.round((points / maxPoints) * 100);
   let emoji;
 
